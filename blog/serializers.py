@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Todo, Comment
+from .models import Post, Comment
 from django import forms
 
 
 from rest_framework import serializers
 
-class TodoSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'#('id', 'created_date', 'text', 'approve')
@@ -18,5 +18,5 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         return post.get_text_preview()
 
     class Meta:
-        model = Todo
+        model = Post
         fields = '__all__' #('title', 'author', 'created_date', 'preview_text')

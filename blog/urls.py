@@ -14,39 +14,36 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-# from django.urls import path
-# from . import views
-# from django.urls import include, path
-# from rest_framework import routers
-# from .views import CommentViewSet
-#
-# urlpatterns = [
-#     path('', views.post_list, name='post_list'),
-#     path('posts/<int:id>/', views.post_detail, name='post_detail'),
-#     path('posts/<int:id>/edit/', views.post_edit, name='post_edit'),
-#     path('posts/<int:id>/publish/', views.post_publish, name='post_publish'),
-#     path('posts/<int:id>/comment/', views.add_comment, name='add_comment'),
-#     path('posts/add/', views.post_add, name='post_add'),
-# ]
+from django.urls import path
+from . import views
+from django.urls import include, path
+from rest_framework import routers
+from .views import CommentViewSet, BlogPostViewSet
+
+router = routers.DefaultRouter()
+router.register(r'comments', CommentViewSet)
+router.register(r'posts', BlogPostViewSet)
+
+
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('posts/<int:id>/', views.post_detail, name='post_detail'),
+    path('posts/<int:id>/edit/', views.post_edit, name='post_edit'),
+    path('posts/<int:id>/publish/', views.post_publish, name='post_publish'),
+    path('posts/<int:id>/comment/', views.add_comment, name='add_comment'),
+    path('posts/add/', views.post_add, name='post_add'),
+    path('api/', include(router.urls))
+]
 
 # router = routers.DefaultRouter()
 # router.register(r'comments', CommentViewSet)
-#
+# router.register(r'posts', BlogPostViewSet)
+
 # urlpatterns = [
-#
+
 #      path('', include(router.urls))
 #  ]
 
 
 
-
-from django.urls import include, path
-from .views import (
-    TodoListApiView,
-    TodoDetailApiView
-)
-
-urlpatterns = [
-    path('api', TodoListApiView.as_view()),
-    path('api/<int:todo_id>/', TodoDetailApiView.as_view()),
-]
