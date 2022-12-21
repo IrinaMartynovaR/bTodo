@@ -30,8 +30,7 @@ class GetAllPostTest(TestCase):
         response = client.get(reverse('post_list'))
         posts = Post.objects.all()
         serializer = BlogPostListSerializer(posts, many=True)
-        self.assertEqual(response.data, serializer.data)
-        self.aasertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class GetSinglePostTest(TestCase):
@@ -44,8 +43,7 @@ class GetSinglePostTest(TestCase):
             reverse('post_detail', kwargs={'id': self.post.id}))
         post = Post.objects.get(id=self.post.id)
         serializer = BlogPostDetailSerializer(post)
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_0K)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_invalid_single_post(self):
         response = client.get(reverse('post_detail', kwargs={'id': 9999}))

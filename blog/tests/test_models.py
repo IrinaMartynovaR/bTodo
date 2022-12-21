@@ -28,3 +28,5 @@ class PostTest(TestCase):
     def test_published_post_filtering(self):
         posts = Post.published.all()
         self.assertEqual(posts.count(), 1)
+        print(posts)
+
